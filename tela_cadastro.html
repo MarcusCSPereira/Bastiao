@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro - Bastião</title>
+  <link rel="stylesheet" href="/css/tela_cadastro_styles.css">
+  <link rel="icon" type="image/ico" href="/images/icon.ico">
+</head>
+<body>
+  <div class="login-container">
+    <div class="form-container">
+      <h1>Registre-se para usar o Bastião</h1>
+      <form id="registerForm">
+        <div class="input-group">
+          <input type="text" id="fullName" placeholder="Full Name" required />
+        </div>
+        <div class="input-group">
+          <input type="email" id="email" placeholder="Email" required />
+        </div>
+        <div class="input-group">
+          <input type="password" id="password" placeholder="Password" required />
+        </div>
+        <div class="input-group">
+          <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+        </div>
+        <button type="submit" class="submit-btn">Registrar-se</button>
+      </form>
+      <p>
+        Já tem uma conta? <a href="tela_login.html" class="login-link">Login</a>
+      </p>
+    </div>
+    <div class="image-container">
+      <img src="images/logo_cadastro_page.png" alt="Illustration" />
+    </div>
+  </div>
+  <script src="/scripts/tela_cadastro_script.js"></script>
+</body>
+</html>

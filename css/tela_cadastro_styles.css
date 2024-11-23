@@ -1,3 +1,4 @@
+/* Estilos gerais */
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
@@ -9,6 +10,7 @@ body {
   color: #333;
 }
 
+/* Container principal */
 .login-container {
   background-color: #ffffff;
   border-radius: 15px;
@@ -16,13 +18,22 @@ body {
   width: 100%;
   max-width: 400px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
+/* Cabeçalho */
 h1 {
   color: #4e9fff;
   font-size: 1.8rem;
   margin-bottom: 20px;
+}
+
+/* Formulário */
+form {
+  width: 100%;
 }
 
 .input-group {
@@ -35,33 +46,15 @@ h1 {
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
+  transition: border-color 0.3s ease;
 }
 
-.options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  font-size: 0.9rem;
+.input-group input:focus {
+  border-color: #4e9fff;
+  outline: none;
 }
 
-.options label {
-  display: flex;
-  align-items: center;
-  color: #666;
-}
-
-.options a {
-  color: #4e9fff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-.options a:hover {
-  color: #378ad6;
-}
-
+/* Botão de cadastro */
 .submit-btn {
   width: 100%;
   padding: 12px;
@@ -85,6 +78,7 @@ h1 {
   transform: translateY(1px);
 }
 
+/* Link para login */
 p {
   text-align: center;
   margin-top: 20px;
@@ -92,17 +86,18 @@ p {
   color: #777;
 }
 
-p a.signup-link {
+p a.login-link {
   color: #4e9fff;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s;
 }
 
-p a.signup-link:hover {
+p a.login-link:hover {
   color: #378ad6;
 }
 
+/* Imagem no lado inferior */
 .image-container {
   margin-top: 20px;
   text-align: center;
@@ -111,5 +106,5 @@ p a.signup-link:hover {
 .image-container img {
   max-width: 100%;
   height: auto;
-  border-radius: 15px;
+  border-radius: 10px;
 }
