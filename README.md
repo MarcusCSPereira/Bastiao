@@ -18,8 +18,8 @@ A aplicação foi projetada para ser simples e intuitiva, facilitando a integra�
 
 ## 🔨 Construído com:
 
-* 💻 VsCode | Maven 
-* 🛠️ Java 1.8.401 | JavaFX
+* 💻 VsCode 
+* 🛠️ HTML+CSS+JS | Angular | Python+Django Rest Framework
 * 🎲 PostgreSQL
 
 ##
@@ -27,9 +27,12 @@ A aplicação foi projetada para ser simples e intuitiva, facilitando a integra�
 ## 👨🏽‍💻 Tecnologias Utilizadas:
 
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-![JavaFX](https://img.shields.io/badge/javafx-%23FF0000.svg?style=for-the-badge&logo=javafx&logoColor=white)
-![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ##
