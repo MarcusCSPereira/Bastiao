@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bastião - Monitoramento de Segurança</title>
+  <!-- CSS e JS do Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
+
+<body>
+  <header>
+    <div class="menu-bar">
+      <h1>Bastião</h1>
+      <button id="report-crime-btn" class="btn btn-primary">Relatar Crime</button>
+    </div>
+  </header>
+  <main>
+    <!-- Barra de pesquisa -->
+    <div id="search-container">
+      <input type="text" id="search-bar" placeholder="Buscar Endereço">
+      <button id="filter-btn" class="btn btn-primary">Filtrar</button>
+    </div>
+
+    <!-- Modal para relatar crime -->
+<div id="crime-modal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Relatar Crime</h2>
+        <form id="crime-form">
+            <div class="form-group">
+                <label for="crime-type">Tipo de Crime:</label>
+                <div class="select-container">
+                    <select id="crime-type" required>
+                        <option value="assalto" data-icon="https://img.icons8.com/?size=100&id=Tzf2oaGSBJAq&format=png">Assalto</option>
+                        <option value="roubo" data-icon="https://img.icons8.com/?size=100&id=8785&format=png">Roubo</option>
+                        <option value="assedio" data-icon="https://img.icons8.com/?size=100&id=z1frfPwq14GV&format=png">Assédio</option>
+                    </select>
+                    <img id="crime-icon-preview" src="https://img.icons8.com/?size=100&id=Tzf2oaGSBJAq&format=png" alt="Ícone do Crime" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="crime-details">Detalhes:</label>
+                <textarea id="crime-details" rows="3" placeholder="Descrição do ocorrido" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="crime-date-time">Data e Hora:</label>
+                <input type="datetime-local" id="crime-date-time" required />
+            </div>
+            <div class="form-group">
+                <label for="crime-location">Local no Mapa:</label>
+                <button type="button" id="select-location-btn" class="btn btn-primary">Selecionar Local</button>
+                <p id="selected-location" class="location-text">Nenhum local selecionado</p>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success">Adicionar Relato</button>
+                <button type="button" id="close-modal-btn" class="btn btn-danger">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <!-- Mapa interativo -->
+    <div id="map-container">
+      <div id="map"></div>
+    </div>
+
+    <!-- Footer de navegação -->
+    <footer>
+      <button class="nav-btn" id="suporte-btn">Suporte</button>
+      <button class="nav-btn" id="colabore-btn">Colabore</button>
+      <button class="nav-btn" id="regiao-btn">Região</button>
+    </footer>
+  </main>
+
+  <footer id="custom-footer">
+    <div class="footer-container">
+      <!-- Logo e Informações -->
+      <div class="footer-left">
+        <h2>Bastião</h2>
+        <ul>
+          <li><a href="#">Política de privacidade</a></li>
+          <li><a href="#">Fale conosco</a></li>
+          <li><a href="#">Perguntas frequentes</a></li>
+        </ul>
+        <p>Este projeto é feito colaborativamente para comunidades. Por isso, o uso do seu conteúdo é livre.</p>
+      </div>
+
+      <!-- Redes sociais -->
+      <div class="footer-center">
+        <h3>Nossas redes sociais</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer-right">
+        <h3>Cadastre-se em nossa newsletter gratuitamente!</h3>
+        <form id="newsletter-form">
+          <input type="email" placeholder="Email" required />
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+        <p>Ao se cadastrar você concorda com os termos de uso.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
