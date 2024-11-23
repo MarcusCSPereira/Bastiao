@@ -38,7 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
       iconSize: [40, 40],
       iconAnchor: [20, 40],
       popupAnchor: [0, -40]
-    })
+    }),
+    racismo: L.icon({
+      iconUrl: 'https://img.icons8.com/?size=100&id=8992&format=png&color=000000',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+      popupAnchor: [0, -40]
+    }),
   };
 
   // Modal e interações
@@ -120,6 +126,8 @@ document.addEventListener("DOMContentLoaded", () => {
       crimeTitle = "Roubo";
     } else if (tipo === "assedio") {
       crimeTitle = "Assédio";
+    } else if (tipo === "racismo") {
+      crimeTitle = "Racismo";
     }
 
     const popupContent = `

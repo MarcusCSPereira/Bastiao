@@ -1,4 +1,3 @@
-/* Geral */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -10,12 +9,6 @@ header {
     padding: 10px;
     display: flex;
     align-items: center;
-}
-
-.menu-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
 #search-container {
@@ -111,6 +104,7 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 350px;
 }
 
 label {
@@ -189,6 +183,31 @@ select {
     background: #c0392b;
 }
 
+.menu-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px;
+  width: 100%;
+}
+
+.button-container {
+  margin-left: auto; /* Empurra o botão para a direita */
+}
+
+#report-crime-btn {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#report-crime-btn:hover {
+  background-color: #2980b9;
+}
+
 /* Texto da localização */
 .location-text {
     font-size: 0.9rem;
@@ -200,30 +219,32 @@ select {
 #custom-footer {
     background-color: #2c3e50;
     color: #fff;
-    padding: 20px 40px;
+    padding: 20px 20px;
 }
 
 .footer-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.footer-left, .footer-center, .footer-right {
+.footer-left {
+    text-align: left;
+    margin-left: auto;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-left, .footer-right {
     flex: 1;
-    min-width: 250px;
-}
-
-.footer-left h2, .footer-center h3, .footer-right h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
 }
 
 .footer-left ul {
     list-style: none;
     padding: 0;
-    margin: 0 0 15px 0;
+    margin: 0;
 }
 
 .footer-left ul li {
@@ -244,48 +265,15 @@ select {
     color: #bdc3c7;
 }
 
-.social-icons a {
+.footer-right .social-icons a {
     color: #fff;
     margin-right: 10px;
     font-size: 18px;
     text-decoration: none;
 }
 
-.social-icons a:hover {
+.footer-right .social-icons a:hover {
     color: #f39c12;
-}
-
-#newsletter-form {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-#newsletter-form input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-#newsletter-form button {
-    background-color: #f39c12;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#newsletter-form button:hover {
-    background-color: #e67e22;
-}
-
-.footer-right p {
-    font-size: 12px;
-    color: #bdc3c7;
-    margin-top: 5px;
 }
 
 /* Custom cursor para seleção de local */
