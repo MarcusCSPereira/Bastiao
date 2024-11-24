@@ -53,7 +53,7 @@ document.getElementById('registerForm').addEventListener('submit', function (eve
       messageElement.textContent = 'Cadastro realizado com sucesso!';
       const result = await response.json();
 
-      window.location.href = 'tela_login.html';
+      window.location.href = 'index.html';
 
       alert("Funcionou")
 
