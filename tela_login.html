@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Bastião</title>
   <link rel="stylesheet" href="/css/tela_login_styles.css">
   <link rel="icon" type="image/ico" href="/images/icon.ico">
+  <style>
+    /* Estilos para as mensagens */
+    .message {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 14px;
+      color: red;
+    }
+    .message.success {
+      color: green;
+    }
+  </style>
 </head>
-
 <body>
   <div class="login-container">
     <div class="form-container">
       <h1>Bem-vindo ao Bastião</h1>
       <form id="loginForm">
         <div class="input-group">
-          <input type="text" id="username" placeholder="Username" required />
+          <!-- Alterado o id de 'username' para 'email' -->
+          <input type="email" id="email" placeholder="Email" required />
         </div>
         <div class="input-group">
           <input type="password" id="password" placeholder="Password" required />
@@ -29,6 +40,8 @@
         </div>
         <button type="submit" class="submit-btn">Login</button>
       </form>
+      <!-- Mensagem de feedback -->
+      <div id="message" class="message"></div>
       <p>
         Don't have an account? <a href="tela_cadastro.html" class="signup-link">Sign Up</a>
       </p>
@@ -39,5 +52,4 @@
   </div>
   <script src="/scripts/tela_login_script.js"></script>
 </body>
-
 </html>
