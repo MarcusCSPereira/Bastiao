@@ -65,6 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fechar modal
   closeModalBtn.addEventListener("click", () => {
     modal.classList.add("hidden");
+    form.reset(); // Limpar formulário
+    crimeIconPreview.src = "https://img.icons8.com/?size=100&id=Tzf2oaGSBJAq&format=png";
     selectedLatLng = null; // Resetar seleção de local
     selectedLocationText.textContent = "Nenhum local selecionado";
   });
@@ -102,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     map.on("click", onMapClick);
   });
 
-  // Adicionar relato ao mapa
+  // Adicionar relato ao mapa com círculo
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -118,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Configurar ícone do crime
     const crimeIconToUse = icons[tipo];
 
-    // Adicionar marcador no mapa
+    // Adicionar título do crime
     let crimeTitle;
     if (tipo === "assalto") {
       crimeTitle = "Assalto";
@@ -130,6 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
       crimeTitle = "Racismo";
     }
 
+    // Criar conteúdo do popup
     const popupContent = `
     <div>
         <h3>${crimeTitle}</h3>
@@ -137,16 +140,212 @@ document.addEventListener("DOMContentLoaded", () => {
         <p><strong>Data e Hora:</strong> ${new Date(dateTime).toLocaleString()}</p>
         <p><strong>Local:</strong> ${selectedLatLng.lat.toFixed(4)}, ${selectedLatLng.lng.toFixed(4)}</p>
     </div>
-`;
+  `;
 
-    L.marker([selectedLatLng.lat, selectedLatLng.lng], { icon: crimeIconToUse })
+    // Adicionar marcador no mapa
+    const marker = L.marker([selectedLatLng.lat, selectedLatLng.lng], { icon: crimeIconToUse })
       .addTo(map)
       .bindPopup(popupContent);
 
+    // Adicionar círculo em torno do marcador
+    const circle = L.circle([selectedLatLng.lat, selectedLatLng.lng], {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.3,
+      radius: 200 // Raio em metros
+    }).addTo(map);
+
+    // Sincronizar abertura de popup com o círculo
+    marker.on('click', () => {
+      // Configurar o nível de zoom desejado e o tempo de transição
+      const zoomLevel = 16; // Nível de zoom ao clicar no marcador
+      const zoomDuration = 800; // Duração da animação em milissegundos
+
+      // Animar o zoom
+      map.flyTo(marker.getLatLng(), zoomLevel, {
+        animate: true,
+        duration: zoomDuration / 1000 // Conversão para segundos
+      });
+
+      // Abrir o popup após o zoom com atraso
+      setTimeout(() => {
+        marker.openPopup();
+      }, zoomDuration);
+    });
+
     // Limpar formulário e fechar modal
     form.reset();
+    crimeIconPreview.src = "https://img.icons8.com/?size=100&id=Tzf2oaGSBJAq&format=png";
     selectedLocationText.textContent = "Nenhum local selecionado";
     selectedLatLng = null;
     modal.classList.add("hidden");
+  });
+
+  // Configurar a busca de cidade
+  const searchBar = document.getElementById("search-bar");
+  const filterBtn = document.getElementById("filter-btn");
+
+  // Função para buscar coordenadas usando a API Nominatim
+  async function searchCity(cityName) {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cityName)}`
+      );
+      const results = await response.json();
+
+      if (results.length > 0) {
+        const { lat, lon } = results[0]; // Pega as coordenadas do primeiro resultado
+        return { lat: parseFloat(lat), lon: parseFloat(lon) };
+      } else {
+        alert("Cidade não encontrada. Tente novamente.");
+        return null;
+      }
+    } catch (error) {
+      console.error("Erro ao buscar a cidade:", error);
+      alert("Erro ao buscar a cidade. Tente novamente mais tarde.");
+      return null;
+    }
+  }
+
+  const suggestionsList = document.getElementById("suggestions-list");
+
+  // Função para buscar sugestões da API Nominatim restrita a cidades na Bahia
+  async function getSuggestions(query) {
+    try {
+      const viewbox = "-46.00,-8.00,-37.00,-18.50"; // Limites da Bahia (lon1, lat1, lon2, lat2)
+      const bounded = 1; // Restringir a busca ao viewbox
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&addressdetails=1&viewbox=${viewbox}&bounded=${bounded}`
+      );
+      const results = await response.json();
+
+      // Processar resultados para cidade, estado e CEP
+      return results
+        .filter(result => {
+          // Filtrar apenas lugares administrativos (cidade, estado) e CEPs
+          return (
+            result.type === "administrative" || // Cidades e estados
+            result.class === "place" || // Outros lugares
+            result.type === "postcode" // CEPs
+          );
+        })
+        .map(result => ({
+          name: result.display_name, // Nome completo (cidade, estado ou CEP)
+          type: result.type === "postcode" ? "CEP" : result.type, // Identifica se é cidade, estado ou CEP
+          lat: parseFloat(result.lat),
+          lon: parseFloat(result.lon),
+        }))
+        .filter((item, index, self) =>
+          index === self.findIndex(other => other.name === item.name) // Remove duplicados
+        );
+    } catch (error) {
+      console.error("Erro ao buscar sugestões:", error);
+      return [];
+    }
+  }
+
+  async function updateSuggestions() {
+    const query = searchBar.value.trim();
+    if (query.length < 3) {
+      suggestionsList.classList.add("hidden");
+      return;
+    }
+
+    const suggestions = await getSuggestions(query);
+    suggestionsList.innerHTML = "";
+
+    if (suggestions.length > 0) {
+      suggestions.forEach(suggestion => {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${suggestion.name}</strong> <em>(${suggestion.type})</em>`; // Exibe nome e tipo
+        li.dataset.lat = suggestion.lat;
+        li.dataset.lon = suggestion.lon;
+
+        // Adicionar evento de clique para selecionar a sugestão
+        li.addEventListener("click", () => {
+          map.setView([suggestion.lat, suggestion.lon], 13); // Centralizar no local
+          searchBar.value = suggestion.name; // Atualizar o campo de busca
+          suggestionsList.classList.add("hidden"); // Esconder a lista
+        });
+
+        suggestionsList.appendChild(li);
+      });
+
+      suggestionsList.classList.remove("hidden");
+    } else {
+      suggestionsList.classList.add("hidden");
+    }
+  }
+
+  // Adicionar evento ao campo de entrada
+  searchBar.addEventListener("input", updateSuggestions);
+
+  // Esconder a lista de sugestões ao clicar fora
+  document.addEventListener("click", (e) => {
+    if (!searchBar.contains(e.target) && !suggestionsList.contains(e.target)) {
+      suggestionsList.classList.add("hidden");
+    }
+  });
+
+  // Permitir busca ao pressionar Enter
+  searchBar.addEventListener("keypress", async (e) => {
+    if (e.key === "Enter") {
+      const query = searchBar.value.trim();
+      const suggestions = await getSuggestions(query);
+      if (suggestions.length > 0) {
+        const firstSuggestion = suggestions[0];
+        map.setView([firstSuggestion.lat, firstSuggestion.lon], 13);
+        suggestionsList.classList.add("hidden");
+      }
+    }
+  });
+
+  // Botão de filtro também faz a busca
+  filterBtn.addEventListener("click", async () => {
+    const query = searchBar.value.trim();
+    const suggestions = await getSuggestions(query);
+    if (suggestions.length > 0) {
+      const firstSuggestion = suggestions[0];
+      map.setView([firstSuggestion.lat, firstSuggestion.lon], 13);
+      suggestionsList.classList.add("hidden");
+    }
+  });
+  const regionBtn = document.getElementById("regiao-btn");
+
+  regionBtn.addEventListener("click", () => {
+    // Verificar se o navegador suporta geolocalização
+    if (!navigator.geolocation) {
+      alert("Geolocalização não é suportada pelo seu navegador.");
+      return;
+    }
+
+    // Obter localização do usuário
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+
+        // Centralizar o mapa na localização do usuário com zoom 13
+        map.setView([latitude, longitude], 13);
+
+        // Adicionar um marcador vermelho na localização
+        const marker = L.marker([latitude, longitude], {
+          icon: L.icon({
+            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+            iconSize: [25, 41], // Tamanho do ícone
+            iconAnchor: [12, 41], // Ponto de ancoragem do ícone
+            popupAnchor: [0, -30], // Onde o popup aparece
+            iconColor: 'red',
+          }),
+        })
+          .addTo(map)
+          .bindPopup("Você está aqui.")
+          .openPopup(); // Abre o popup imediatamente
+      },
+      (error) => {
+        console.error("Erro ao obter localização:", error);
+        alert("Não foi possível obter sua localização.");
+      }
+    );
   });
 });
