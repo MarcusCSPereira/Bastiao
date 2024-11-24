@@ -18,7 +18,7 @@ document.getElementById('registerForm').addEventListener('submit', function (eve
     return;
   }
 
-  
+
   setTimeout( async () => {
 
   try {
