@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const map = L.map('map', {
     minZoom: 6,
     maxZoom: 18
-  }).setView([-12.9714, -38.5014], 8);
+  }).setView([-14.8615, -40.8448], 10);
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '© OpenStreetMap & CartoDB contributors',
@@ -15,6 +15,37 @@ document.addEventListener("DOMContentLoaded", () => {
     [-8.000, -37.000]
   ];
   map.setMaxBounds(bounds);
+
+  // Tentar usar a geolocalização do usuário
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        map.setView([latitude, longitude], 13);
+
+        // Adicionar marcador na localização do usuário
+        L.marker([latitude, longitude], {
+          icon: L.icon({
+            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [0, -30],
+          }),
+        })
+          .addTo(map)
+          .bindPopup("Você está aqui.")
+          .openPopup();
+      },
+      (error) => {
+        console.warn("Geolocalização não permitida ou não disponível. Carregando localização padrão.");
+        map.setView(defaultLocation, 13);
+      }
+    );
+  } else {
+    console.warn("Geolocalização não suportada pelo navegador. Carregando localização padrão.");
+    map.setView(defaultLocation, 13);
+  }
 
   // Variável para armazenar o local selecionado
   let selectedLatLng = null;
