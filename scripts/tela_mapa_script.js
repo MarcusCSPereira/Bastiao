@@ -4,10 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
     maxZoom: 18
   }).setView([-14.8615, -40.8448], 10);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap & CartoDB contributors',
-    subdomains: 'abcd',
-    maxZoom: 18
+  // Carregar crimes do DB
+  loadCrimesFromDb();
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
   }).addTo(map);
 
   const bounds = [
@@ -136,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Adicionar relato ao mapa com círculo
-  form.addEventListener("submit", (e) => {
+  document.querySelector('.btn.btn-success').addEventListener("click", async (e) => {
     e.preventDefault();
 
     if (!selectedLatLng) {
@@ -162,6 +164,15 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (tipo === "racismo") {
       crimeTitle = "Racismo";
     }
+
+    // Criar dados do crime
+    const crimeData = {
+      tipo: tipo,
+      detalhes: detalhes,
+      dateTime: dateTime,
+      latitude: selectedLatLng.lat,
+      longitude: selectedLatLng.lng,
+    };
 
     // Criar conteúdo do popup
     const popupContent = `
@@ -203,6 +214,8 @@ document.addEventListener("DOMContentLoaded", () => {
         marker.openPopup();
       }, zoomDuration);
     });
+
+    await saveCrimeToDb(crimeData);
 
     // Limpar formulário e fechar modal
     form.reset();
@@ -330,6 +343,56 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+  async function saveCrimeToDb(crimeData) {
+    try {
+      const response = await fetch('http://localhost:3000/markers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(crimeData),
+      });
+      const data = await response.json();
+    } catch (error) {
+      console.error("Erro ao salvar o crime:", error);
+    }
+  }
+
+  async function loadCrimesFromDb() {
+    try {
+      const response = await fetch('http://localhost:3000/markers');
+      const crimes = await response.json();
+      crimes.forEach(crime => {
+        const crimeIconToUse = icons[crime.tipo];
+        const popupContent = `
+
+          <div>
+            <h3>${crime.tipo}</h3>
+            <p><strong>Detalhes:</strong> ${crime.detalhes}</p>
+            <p><strong>Data e Hora:</strong> ${new Date(crime.dateTime).toLocaleString()}</p>
+            <p><strong>Local:</strong> ${crime.latitude.toFixed(4)}, ${crime.longitude.toFixed(4)}</p>
+          </div>
+        `;
+
+        const circle = L.circle([crime.latitude, crime.longitude], {
+          color: 'red',
+          fillColor: '#f03',
+          fillOpacity: 0.3,
+          radius: 200 // Raio em metros
+        }).addTo(map);
+
+
+        const marker = L.marker([crime.latitude, crime.longitude], { icon: crimeIconToUse })
+          .addTo(map)
+          .bindPopup(popupContent)
+
+
+      });
+    } catch (error) {
+      console.error("Erro ao carregar os crimes:", error);
+    }
+  }
 
   // Botão de filtro também faz a busca
   filterBtn.addEventListener("click", async () => {
