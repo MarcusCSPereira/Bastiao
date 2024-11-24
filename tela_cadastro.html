@@ -6,6 +6,19 @@
   <title>Cadastro - Bastião</title>
   <link rel="stylesheet" href="/css/tela_cadastro_styles.css">
   <link rel="icon" type="image/ico" href="/images/icon.ico">
+  <script src="/scripts/tela_cadastro_script.js" defer></script>
+  <style>
+    /* Estilos adicionais para as mensagens */
+    .message {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 14px;
+      color: red;
+    }
+    .message.success {
+      color: green;
+    }
+  </style>
 </head>
 <body>
   <div class="login-container">
@@ -24,8 +37,10 @@
         <div class="input-group">
           <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
         </div>
-        <button type="submit" class="submit-btn">Registrar-se</button>
+          <button id="button-submit" type="submit" class="submit-btn">Registrar-se</button>
       </form>
+      <!-- Mensagem de feedback -->
+      <div id="message" class="message"></div>
       <p>
         Já tem uma conta? <a href="tela_login.html" class="login-link">Login</a>
       </p>
@@ -34,6 +49,5 @@
       <img src="images/logo_cadastro_page.png" alt="Illustration" />
     </div>
   </div>
-  <script src="/scripts/tela_cadastro_script.js"></script>
 </body>
 </html>
