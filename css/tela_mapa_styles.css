@@ -276,7 +276,60 @@ select {
     color: #f39c12;
 }
 
+.social-icons-container {
+  text-align: center;
+  background-color: #2c3e50; /* Cor de fundo similar à imagem */
+  padding: 20px;
+  color: #fff;
+}
+
+.social-icons-container h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px; /* Espaço entre os ícones */
+}
+
+.social-icons img {
+  width: 50px; /* Tamanho da imagem */
+  height: 50px; /* Tamanho da imagem */
+  border-radius: 50%; /* Torna a imagem redonda */
+  object-fit: cover; /* Garante que a imagem preencha o círculo */
+  border: 1px solid #006089ba; /* Borda branca */
+  cursor: pointer; /* Torna o ícone clicável */
+  transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+}
+
 /* Custom cursor para seleção de local */
 .map-pin-cursor {
     cursor: url('https://img.icons8.com/emoji/48/000000/pushpin-emoji.png'), auto; /* URL do ícone de alfinete */
+}
+
+#search-container {
+  position: relative; /* Define o contêiner como referência para posicionamento absoluto */
+}
+
+#suggestions-list {
+  position: absolute; /* Posiciona a lista de forma absoluta */
+  top: 100%; /* Faz a lista aparecer logo abaixo do campo de texto */
+  left: 0; /* Alinha à esquerda do campo de texto */
+  width: 100%; /* Faz a lista ocupar toda a largura do campo */
+  z-index: 10000; /* Garante que a lista fique acima de outros elementos */
+  background: #fff; /* Fundo branco */
+  border: 1px solid #ccc; /* Adiciona borda para destacar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para melhorar a visualização */
+  max-height: 200px; /* Limita a altura com rolagem, se necessário */
+  overflow-y: auto; /* Permite rolar a lista se for muito longa */
+  list-style: none; /* Remove marcadores */
+  padding: 0; /* Remove o preenchimento padrão */
+  margin: 0; /* Remove margens padrão */
 }

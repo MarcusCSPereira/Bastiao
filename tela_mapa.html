@@ -16,20 +16,22 @@
 <body>
   <header>
     <div class="menu-bar">
-    <div id="logo_bastiao">
-      <h1>Bastião</h1>
-    </div>
-    <div class="button-container">
-      <button id="report-crime-btn" class="btn btn-primary">Relatar Crime</button>
-    </div>
+      <div id="logo_bastiao">
+        <h1>Bastião</h1>
+      </div>
+      <div class="button-container">
+        <button id="report-crime-btn" class="btn btn-primary">Relatar Crime</button>
+      </div>
     </div>
   </header>
   <main>
     <!-- Barra de pesquisa -->
     <div id="search-container">
-      <input type="text" id="search-bar" placeholder="Buscar Endereço">
+      <input type="text" id="search-bar" placeholder="Buscar Endereço" autocomplete="off">
+      <ul id="suggestions-list" class="hidden"></ul>
       <button id="filter-btn" class="btn btn-primary">Filtrar</button>
     </div>
+
 
     <!-- Modal para relatar crime -->
     <div id="crime-modal" class="modal hidden">
@@ -80,7 +82,7 @@
 
     <!-- Footer de navegação -->
     <footer>
-      <button class="nav-btn" id="regiao-btn">Região</button>
+      <button class="nav-btn" id="regiao-btn">Minha Região</button>
     </footer>
   </main>
 
@@ -98,13 +100,37 @@
 
       <!-- Direita -->
       <div class="footer-right">
-        <h3>Nossas redes sociais</h3>
-        <div class="social-icons">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <div class="social-icons-container">
+          <h3>LinkedIn dos nossos membros</h3>
+          <div class="social-icons">
+            <a href="https://www.linkedin.com/in/marcuscspereira/" target="_blank">
+              <img src="/images/profiles_image/marcuscspereira.png" alt="Marcus Pereira">
+            </a>
+            <a href="https://www.linkedin.com/in/hugo-teixeira-mafra/" target="_blank">
+              <img src="/images/profiles_image/hugomafra.jpeg" alt="Hugo Mafra">
+            </a>
+            <a href="https://www.linkedin.com/in/gabriell-ds/" target="_blank">
+              <img src="/images/profiles_image/gabrieldossantos.jpeg" alt="Gabriel dos Santos">
+            </a>
+            <a href="https://www.linkedin.com/in/jvcangussu/" target="_blank">
+              <img src="/images/profiles_image/jvcangussu.jpeg" alt="João Vitor Cangussu">
+            </a>
+            <a href="https://www.linkedin.com/in/lucca-nolasco/" target="_blank">
+              <img src="/images/profiles_image/luccanolasco.png" alt="Lucca Nolasco">
+            </a>
+            <a href="https://www.linkedin.com/in/vitor-rosenbergre-38a05b31b/" target="_blank">
+              <img src="/images/profiles_image/vitorrosenbergue.jpeg" alt="Vitor Rosenberque">
+            </a>
+            <a href="https://www.linkedin.com/in/kauanrubem/" target="_blank">
+              <img src="/images/profiles_image/kauanrubem.jpeg" alt="Kauan Rubem">
+            </a>
+            <a href="https://www.linkedin.com/in/danielmoorais/" target="_blank">
+              <img src="/images/profiles_image/danielmorais.jpeg" alt="Daniel Morais">
+            </a>
+            <a href="https://www.linkedin.com/in/gabrielgustavo/" target="_blank">
+              <img src="/images/profiles_image/gabrielgustavo.jpeg" alt="Gabriel Gustavo">
+            </a>
+          </div>
         </div>
       </div>
     </div>
