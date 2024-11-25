@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #4e9fff, #6bc7ff);
+  background-image: url('../images/fundo_mapa.png');
   height: 100vh;
   display: flex;
   align-items: center;
@@ -104,7 +104,7 @@ p a.login-link:hover {
 }
 
 .image-container img {
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
   border-radius: 10px;
 }
