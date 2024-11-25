@@ -2,10 +2,15 @@
 
 ## 🔎 Sobre o Projeto
 
-Este projeto consiste em uma [breve descrição do projeto], desenvolvido utilizando [tecnologias principais]. O principal objetivo da aplicação é [resumo do objetivo do projeto]. Com isso, é possível realizar operações como [resumo das funcionalidades principais].
+O Bastião consiste em uma plataforma integrada de segurança cidadã, que utiliza a análise de dados de segurança pública para aumentar a participação cidadã e melhorar a comunicação com as autoridades. A plataforma centraliza informações como boletins de ocorrência, estatísticas criminais, dicas de prevenção e mapas interativos de áreas de risco. Através de uma interface intuitiva e acessível em computadores, smartphones e totens públicos, o cidadão poderá consultar essas informações e tomar decisões mais informadas sobre sua segurança. Além disso, a plataforma permite que os cidadãos enviem denúncias e recebam alertas das autoridades em tempo real, fortalecendo a prevenção e a confiança entre a população e os órgãos de segurança.
 
-A aplicação foi projetada para ser simples e intuitiva, facilitando a integração com outras aplicações ou o uso em sistemas que necessitem de [descrição do propósito da aplicação]. Este projeto foi desenvolvido com o intuito de [objetivo pessoal/profissional do projeto].
+O Bastião possui dois principais diferenciais:
 
+O primeiro é a possibilidade de mapeamento com base nas denúncias de casos específicos através do uso de inteligência computacional facilitando uma possível investigação, geração de dados para autoridades e alertas de prevenção, como o envio de notificações personalizadas, para os residentes de cada comunidade.
+
+O segundo é pensado como uma perspectiva futura, de integrar uma funcionalidade de "redes de vizinhança", onde usuários podem formar grupos de monitoramento em suas áreas. Esses grupos podem compartilhar informações em tempo real sobre ocorrências locais, recuperação de bens, entre outros, aumentando a colaboração entre cidadãos.
+
+O nome da plataforma reflete sua proposta: atuar na linha de frente da segurança pública, promovendo uma cultura de prevenção e otimizando as ações com base em dados confiáveis e acessíveis.
 ##
 
 ## 🖼️ Imagens:
