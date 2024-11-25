@@ -346,7 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function saveCrimeToDb(crimeData) {
     try {
-      const response = await fetch('http://localhost:3000/markers', {
+      const response = await fetch('https://json-serve-bice.vercel.app/markers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -361,7 +361,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function loadCrimesFromDb() {
     try {
-      const response = await fetch('http://localhost:3000/markers');
+      const response = await fetch('https://json-serve-bice.vercel.app/markers');
       const crimes = await response.json();
       crimes.forEach(crime => {
         const crimeIconToUse = icons[crime.tipo];

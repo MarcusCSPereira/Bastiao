@@ -23,7 +23,7 @@ document.getElementById('registerForm').addEventListener('submit', function (eve
 
     try {
       // Verificar se o email já está cadastrado
-      const checkResponse = await fetch(`http://localhost:3000/users?email=${email}`);
+      const checkResponse = await fetch(`https://json-serve-bice.vercel.app/users?email=${email}`);
       const existingUsers = await checkResponse.json();
 
       if (existingUsers.length > 0) {
@@ -39,8 +39,10 @@ document.getElementById('registerForm').addEventListener('submit', function (eve
         password,
       };
 
+      console.log('Inicio Post');
+
       // Requisição POST para adicionar o usuário no JSON Server
-      const response = await fetch('http://localhost:3000/users', {
+      const response = await fetch('https://json-serve-bice.vercel.app/users/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,16 +50,22 @@ document.getElementById('registerForm').addEventListener('submit', function (eve
         body: JSON.stringify(newUser),
       });
 
+      console.log('Final Post');
+
+
       messageElement.classList.add('success');
 
       messageElement.textContent = 'Cadastro realizado com sucesso!';
+
+
       const result = await response.json();
-      window.location.href = 'tela_login.html';
+
+
+      window.location.href = 'index.html';
 
     } catch (error) {
-      console.error('Erro ao conectar ao servidor:', error);
-      messageElement.textContent = 'Erro ao conectar ao servidor. Tente novamente mais tarde.';
-
+      console.error('Erro encontrado: ', error);
+      //messageElement.textContent = 'Cadastro realizado com sucesso!';
     }
   }, 2000);
 
