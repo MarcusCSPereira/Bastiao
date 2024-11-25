@@ -18,7 +18,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
 
   try {
     // Fazer a requisição para o JSON Server
-    const response = await fetch(`http://localhost:3000/users?email=${email}&password=${password}`);
+    const response = await fetch(`https://json-serve-bice.vercel.app/users?email=${email}&password=${password}`);
     const users = await response.json();
 
     if (users.length > 0) {
