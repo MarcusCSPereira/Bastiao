@@ -1,6 +1,19 @@
-body {
+html, body {
     margin: 0;
+    padding: 0;
+    height: 100%; /* Garante que o conteúdo ocupe 100% da tela */
+    overflow-x: hidden;
     font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Garante que o conteúdo preencha toda a altura */
+}
+
+main {
+    flex: 1;
 }
 
 header {
@@ -9,6 +22,37 @@ header {
     padding: 10px;
     display: flex;
     align-items: center;
+}
+
+/* Contêiner da logo */
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  height: auto;
+  padding: 10px; /* Opcional para espaçamento */
+}
+
+/* Imagem da logo */
+.logo-container img {
+  max-width: 100%;
+  height: auto; /* Mantém a proporção */
+  width: 100px; /* Tamanho máximo fixo */
+  object-fit: contain; /* Garante que a logo não seja cortada */
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+  .logo-container img {
+    width: 120px; /* Reduz a largura para telas menores */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .logo-container img {
+    width: 100px; /* Reduz ainda mais para dispositivos móveis */
+  }
 }
 
 #search-container {
@@ -38,7 +82,7 @@ header {
 }
 
 #map-container {
-    height: 60vh; /* Define o mapa para ocupar 60% da altura da tela */
+    height: 92%; /* Define o mapa para ocupar 60% da altura da tela */
     width: 100%;
 }
 
@@ -48,139 +92,285 @@ header {
     background: #e1e1e1;
 }
 
-/* Footer */
-footer {
-    display: flex;
-    justify-content: space-around;
-    background-color: #34495e;
-    color: white;
-    padding: 10px 0;
+/* Footer estilizado */
+#styled-footer {
+  background-color: #2c3e50;
+  color: white;
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaçamento reduzido */
+  border-top: 2px solid #34495e; /* Linha superior para destacar */
+  font-size: 14px; /* Tamanho reduzido */
+  height: auto; /* Altura automática */
+  margin: 0;
+}
+
+/* Topo do Footer: Minha Região */
+.footer-top {
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #34495e;
+  margin-bottom: 10px; /* Espaço menor */
 }
 
 .nav-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+  background: #34495e;
+  border: 1px solid #f39c12;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 5px 15px;
+  transition: all 0.3s ease;
 }
 
 .nav-btn:hover {
-    color: #f39c12;
+  background: #f39c12;
+  color: #2c3e50;
 }
 
-/* Modal para relatar crime */
+/* Parte Principal */
+.footer-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Coluna Esquerda */
+.footer-left {
+  flex: 1;
+}
+
+.footer-left h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #f39c12;
+}
+
+.footer-left ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-left ul li {
+  margin-bottom: 8px;
+}
+
+.footer-left ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.footer-left ul li a:hover {
+  text-decoration: underline;
+  color: #f39c12;
+}
+
+/* Coluna Direita */
+.footer-right {
+  flex: 1;
+  text-align: center;
+}
+
+.footer-right h3 {
+  margin-bottom: 10px;
+  color: #f39c12;
+  font-size: 16px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.social-icons img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px #f39c12;
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+  .footer-main {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-left, .footer-right {
+    flex: unset;
+  }
+}
+
+/* Estilo geral do modal */
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
+/* Esconde o modal por padrão */
 .modal.hidden {
-    display: none;
+  display: none;
 }
 
+/* Conteúdo do modal */
 .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 400px;
-    max-width: 90%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
 }
 
+/* Título do modal */
+.modal-content h2 {
+  margin-top: 0;
+  color: #333;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Estilização do formulário */
 .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 350px;
+  margin-bottom: 15px;
 }
 
 label {
-    font-weight: bold;
-    margin-bottom: 5px;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
 }
 
-textarea, select, input[type="time"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-    font-size: 14px;
-}
-
-/* Estilo do seletor com ícones */
-.select-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    position: relative;
-}
-
+input,
+textarea,
 select {
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    width: calc(100% - 60px);
-    border: 1px solid #ccc;
-    background: #fff;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: none;
+}
+
+.select-container {
+  position: relative;
+}
+
+.select-container select {
+  appearance: none;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.select-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#crime-type {
+  flex-grow: 1;
+  padding-right: 50px;
 }
 
 #crime-icon-preview {
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    right: 10px;
-    top: calc(50% - 20px);
-    pointer-events: none;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Botão de localização */
+.location-text {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #777;
 }
 
 /* Botões */
 .btn {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .btn-primary {
-    background: #3498db;
-    color: white;
+  background-color: #007bff;
+  color: #fff;
 }
 
 .btn-primary:hover {
-    background: #2980b9;
+  background-color: #0056b3;
 }
 
 .btn-success {
-    background: #2ecc71;
-    color: white;
+  background-color: #28a745;
+  color: #fff;
 }
 
 .btn-success:hover {
-    background: #27ae60;
+  background-color: #218838;
 }
 
 .btn-danger {
-    background: #e74c3c;
-    color: white;
+  background-color: #dc3545;
+  color: #fff;
 }
 
 .btn-danger:hover {
-    background: #c0392b;
+  background-color: #c82333;
+}
+
+/* Ações do formulário */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .menu-bar {
@@ -189,124 +379,6 @@ select {
   align-items: center;
   padding: 10px 10px;
   width: 100%;
-}
-
-.button-container {
-  margin-left: auto; /* Empurra o botão para a direita */
-}
-
-#report-crime-btn {
-  padding: 10px 20px;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#report-crime-btn:hover {
-  background-color: #2980b9;
-}
-
-/* Texto da localização */
-.location-text {
-    font-size: 0.9rem;
-    color: #555;
-    margin-top: 5px;
-}
-
-/* Rodapé */
-#custom-footer {
-    background-color: #2c3e50;
-    color: #fff;
-    padding: 20px 20px;
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.footer-left {
-    text-align: left;
-    margin-left: auto;
-}
-
-.footer-right {
-    text-align: right;
-}
-
-.footer-left, .footer-right {
-    flex: 1;
-}
-
-.footer-left ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-left ul li {
-    margin-bottom: 10px;
-}
-
-.footer-left ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-.footer-left ul li a:hover {
-    text-decoration: underline;
-}
-
-.footer-left p {
-    font-size: 12px;
-    color: #bdc3c7;
-}
-
-.footer-right .social-icons a {
-    color: #fff;
-    margin-right: 10px;
-    font-size: 18px;
-    text-decoration: none;
-}
-
-.footer-right .social-icons a:hover {
-    color: #f39c12;
-}
-
-.social-icons-container {
-  text-align: center;
-  background-color: #2c3e50; /* Cor de fundo similar à imagem */
-  padding: 20px;
-  color: #fff;
-}
-
-.social-icons-container h2 {
-  font-size: 18px;
-  margin-bottom: 15px;
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px; /* Espaço entre os ícones */
-}
-
-.social-icons img {
-  width: 50px; /* Tamanho da imagem */
-  height: 50px; /* Tamanho da imagem */
-  border-radius: 50%; /* Torna a imagem redonda */
-  object-fit: cover; /* Garante que a imagem preencha o círculo */
-  border: 1px solid #006089ba; /* Borda branca */
-  cursor: pointer; /* Torna o ícone clicável */
-  transition: transform 0.3s ease;
-}
-
-.social-icons img:hover {
-  transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
 }
 
 /* Custom cursor para seleção de local */
