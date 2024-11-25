@@ -10,7 +10,7 @@ A aplicação foi projetada para ser simples e intuitiva, facilitando a integra�
 
 ## 🖼️ Imagens:
 
-### Exemplo de [descrição da imagem] :
+### Exemplo de interação com o sistema :
 
 ![PREVIEW1][preview-preview1]
 
@@ -37,60 +37,26 @@ A aplicação foi projetada para ser simples e intuitiva, facilitando a integra�
 
 ##
 
-# ⭐️ Começando:
-
-### Para obter uma cópia local e executar o projeto, siga as etapas a seguir:
-
-##
-
-### 💻 Pré-requisitos:
-
-* Git
-
-```sh
-sudo apt-get install git
-```
-
-##
-
-#### Outros comandos Aqui
-
-##
-
-### 🚀 Instalação:
- 
-1. Clone o repositório
-```sh
-git clone [url-do-repositorio]
-```
-##
-
-2. Navegue até o diretório do projeto:
-```sh
-cd [diretorio-do-repositorio]
-```
-##
-
-
-4. Instale as dependências necessárias (especificar dependências):
-```sh
-instalar dependências
-```
-##
-
 <!-- USAGE EXAMPLES -->
 ### 🖥️ Utilizando o projeto:
 
-1. Navegue até o diretório do projeto:
-```sh
-cd [diretorio-do-projeto]
-```
 
-##
+#### O primeiro passo será realizar o cadastro no site:
 
-#### O passo a passo para execução do mesmo.
+![PREVIEW2][preview-preview2]
 
-##
+#### Logo após realize o login com suas credenciais cadastradas no sistema:
+
+![PREVIEW3][preview-preview3]
+
+#### Agora você pode registrar e visualizar os crimes na sua região:
+
+![PREVIEW4][preview-preview4]
+
+#### Para registrar o crime, clique em relatar crime, preencha os campos e escolha a localização:
+
+![PREVIEW5][preview-preview5]
+
 
 <!-- CONTACT -->
 ## 📫 Contato
@@ -102,16 +68,11 @@ cd [diretorio-do-projeto]
   <a href="contato.marcuscspereira@gmail.com" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/gmail/default.svg" width="47" height="35" alt="gmail logo"  />
   </a>
-  <a href="https://www.instagram.com/_marcus.cesar/" target="_blank">
-    <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/instagram/default.svg" width="47" height="35" alt="instagram logo"  />
-  </a>
 </div>
 
 <!-- Adicionar LINKS & IMAGES -->
-[preview-preview1]: preview/preview_1.png
-
-## 📝 Licença
-
-Esse projeto está sob licença. Veja o arquivo [adicionar licença aqui] para mais detalhes.
-
-
+[preview-preview1]: images/preview_images/preview_5.png
+[preview-preview2]: images/preview_images/preview_2.jpeg
+[preview-preview3]: images/preview_images/preview_1.jpeg
+[preview-preview4]: images/preview_images/preview_3.jpeg
+[preview-preview5]: images/preview_images/preview_4.jpeg
